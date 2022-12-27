@@ -7,8 +7,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const events = [];
+
+app.get("/events", (req, res) => {
+	res.send(events);
+});
+
 app.post("/events", async (req, res) => {
 	const event = req.body;
+	events.push(event);
 
 	await axios.post("http://localhost:4000/events", event).catch((err) => {
 		console.log(err.message, "4000");
