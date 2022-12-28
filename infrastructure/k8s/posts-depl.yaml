@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1
+  # Selector is used to match the labels of the pods to the labels of the deployment. Deployment will be incharge of the pods with the labels that match the selector.
+  selector:
+    matchLabels:
+      app: posts
+  # Template is used to define the pods that will be created by the deployment.
+  template:
+    metadata:
+      # Labels are used to match the labels of the pods to the labels of the deployment
+      labels:
+        app: posts
+    spec:
+      containers:
+      - name: posts
+        image: chirag4904/posts:0.0.1
